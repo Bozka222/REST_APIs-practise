@@ -1,11 +1,12 @@
 import random
+import os
 from flask import Flask, jsonify, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 # Connect to Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 db = SQLAlchemy()
 db.init_app(app)
 
@@ -118,4 +119,4 @@ def delete_cafe(cafe_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
